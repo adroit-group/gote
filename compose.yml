@@ -1,0 +1,13 @@
+services:
+  app:
+    image: ghcr.io/yourusername/yourapp:latest
+    build:
+      context: "."
+      dockerfile: build/Dockerfile
+      args:
+        - COMMITTISH=${COMMITTISH}
+        - BUILD_DATE=${BUILD_DATE}
+    ports:
+      - "80:80"
+    networks:
+      - default

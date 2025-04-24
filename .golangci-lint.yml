@@ -1,0 +1,26 @@
+run:
+  timeout: 2m
+  go: "1.24"
+  tests: true
+output:
+  formats:
+    - format: github-actions
+      path: stdout
+linters:
+  enable:
+    - errname
+    - goconst
+    - goimports
+    - nonamedreturns
+    - prealloc
+    - promlinter
+    - sloglint
+    - canonicalheader
+    - cyclop
+    - wsl
+    - unused
+    - usestdlibvars
+    - gosec
+    - testifylint
+    - nolintlint
+    - govet
