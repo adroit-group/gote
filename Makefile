@@ -15,7 +15,6 @@ help:
 
 # Starts the project
 start:
-	@echo "$$COMMITTISH $$BUILD_DATE"
 	@docker-compose up -d --build
 
 # Stops the project and removes the containers

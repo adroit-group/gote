@@ -2,12 +2,14 @@ package version
 
 import "github.com/adroit-group/go-template/pkg/version"
 
-var Committish string = "unknown"
-var BuildDate string = "unknown"
+var (
+	committish = "unknown"
+	buildDate  = "unknown"
+)
 
 func GetVersion() version.Version {
 	return version.Version{
-		Committish: Committish,
-		BuildDate:  BuildDate,
+		Committish: committish,
+		BuildDate:  buildDate,
 	}
 }

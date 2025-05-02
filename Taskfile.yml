@@ -1,0 +1,85 @@
+version: "3"
+
+vars:
+  COMMITTISH:
+    sh: git rev-parse --short HEAD
+  BUILD_DATE:
+    sh: date -u +"%Y-%m-%dT%H:%M:%SZ"
+
+env:
+  COMMITTISH: "{{.COMMITTISH}}"
+  BUILD_DATE: "{{.BUILD_DATE}}"
+
+tasks:
+  default:
+    desc: Prints the available commands
+    cmds:
+      - task --list
+
+  get-tools:
+    desc: Downloads the required tools for the project
+    cmds:
+      - task: download-golangci-lint
+
+  start:
+    silent: true
+    desc: Starts the project
+    cmds:
+      - docker-compose up -d --build
+
+  clean:
+    silent: true
+    desc: Stops the project and removes the containers
+    cmds:
+      - docker-compose down --volumes --remove-orphans
+
+  test:
+    silent: true
+    desc: Runs the tests for the project
+    cmds:
+      - go test -cover ./...
+
+  lint:
+    silent: true
+    desc: Lints the code using golangci-lint and go fmt, and fix the go.mod file with go mod tidy
+    vars:
+      GOLANGCI_LINT:
+        sh: |
+          if [ ! -f hack/golangci-lint ]; then
+            echo "golangci-lint"
+          else
+            echo "./hack/golangci-lint"
+          fi
+    cmds:
+      - go mod tidy
+      - go fmt ./...
+      - "{{.GOLANGCI_LINT}} run ./..."
+
+  download-golangci-lint:
+    desc: Downloads golangci-lint binary from GitHub releases
+    internal: true
+    vars:
+      VERSION: 2.1.5
+      OS:
+        sh: |
+          case "$(uname -s)" in
+            Darwin) echo "darwin" ;;
+            Linux) echo "linux" ;;
+            *) echo "Unsupported OS" && exit 1 ;;
+          esac
+      ARCH:
+        sh: |
+          case "$(uname -m)" in
+            x86_64) echo "amd64" ;;
+            arm64|aarch64) echo "arm64" ;;
+            *) echo "Unsupported architecture" && exit 1 ;;
+          esac
+    cmds:
+      - mkdir -p hack/tmp
+      - curl -sSL https://github.com/golangci/golangci-lint/releases/download/v{{.VERSION}}/golangci-lint-{{.VERSION}}-{{.OS}}-{{.ARCH}}.tar.gz -o hack/tmp/golangci-lint.tar.gz
+      - tar -xzf hack/tmp/golangci-lint.tar.gz -C hack/tmp
+      - mv hack/tmp/golangci-lint-{{.VERSION}}-{{.OS}}-{{.ARCH}}/golangci-lint hack/
+      - rm -rf hack/tmp
+      - chmod +x hack/golangci-lint
+    status:
+      - test hack/golangci-lint

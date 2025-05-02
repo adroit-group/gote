@@ -7,7 +7,13 @@ services:
       args:
         - COMMITTISH=${COMMITTISH}
         - BUILD_DATE=${BUILD_DATE}
+    environment:
+      OTEL_SERVICE_NAME: yourapp
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
+      OTEL_TRACES_EXPORTER: console
+      OTEL_METRICS_EXPORTER: prometheus
     ports:
       - "80:80"
+      - "9464:9464"
     networks:
       - default

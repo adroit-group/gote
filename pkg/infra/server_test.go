@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/adroit-group/go-template/pkg/logger"
+	"github.com/stretchr/testify/require"
 )
 
 func TestRunHTTPServerWithGracefulShutdown(t *testing.T) {
@@ -32,7 +33,8 @@ func TestRunHTTPServerWithGracefulShutdown(t *testing.T) {
 		t.Fatalf("Failed to find available port: %v", err)
 	}
 	port := listener.Addr().(*net.TCPAddr).Port
-	listener.Close()
+	err = listener.Close()
+	require.NoError(t, err)
 
 	addr := fmt.Sprintf("localhost:%d", port)
 	srv := &http.Server{
@@ -58,7 +60,8 @@ func TestRunHTTPServerWithGracefulShutdown(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to connect to server: %v", err)
 	}
-	resp.Body.Close()
+	err = resp.Body.Close()
+	require.NoError(t, err)
 
 	if resp.StatusCode != http.StatusOK {
 		t.Errorf("Expected status 200 OK, got %d", resp.StatusCode)
