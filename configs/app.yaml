@@ -1,0 +1,7 @@
+http:
+  base_path: /api
+  port: 80
+  read_timeout: 15s
+  read_header_timeout: 5s
+  write_timeout: 15s
+  idle_timeout: 60s

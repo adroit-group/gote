@@ -32,5 +32,6 @@ RUN CGO_ENABLED=0 otel go build -a \
 
 FROM cgr.dev/chainguard/static:latest
 COPY --from=builder /app/bin/service /usr/local/bin/service
+COPY configs/app.yaml /etc/service/config.yaml
 EXPOSE 80
 ENTRYPOINT ["service"]
