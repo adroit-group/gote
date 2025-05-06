@@ -1,6 +1,6 @@
 package version
 
-import "github.com/adroit-group/go-template/pkg/version"
+import "github.com/adroit-group/gote/pkg/version"
 
 var (
 	committish = "unknown"

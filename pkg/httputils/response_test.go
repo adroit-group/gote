@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/adroit-group/go-template/pkg/logger"
+	"github.com/adroit-group/gote/pkg/logger"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -4,9 +4,9 @@ import (
 	"log/slog"
 	"net/http"
 
-	"github.com/adroit-group/go-template/internal/version"
-	"github.com/adroit-group/go-template/pkg/httphandlers"
-	"github.com/adroit-group/go-template/pkg/httputils"
+	"github.com/adroit-group/gote/internal/version"
+	"github.com/adroit-group/gote/pkg/httphandlers"
+	"github.com/adroit-group/gote/pkg/httputils"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-playground/validator/v10"
 )

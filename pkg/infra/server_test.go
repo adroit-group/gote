@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adroit-group/go-template/pkg/logger"
+	"github.com/adroit-group/gote/pkg/logger"
 	"github.com/stretchr/testify/require"
 )
 

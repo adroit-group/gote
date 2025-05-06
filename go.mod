@@ -1,4 +1,4 @@
-module github.com/adroit-group/go-template
+module github.com/adroit-group/gote
 
 go 1.24.1
 

@@ -3,7 +3,7 @@ package internal
 import (
 	"time"
 
-	"github.com/adroit-group/go-template/pkg/config"
+	"github.com/adroit-group/gote/pkg/config"
 )
 
 const (

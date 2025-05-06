@@ -3,8 +3,8 @@ package httphandlers
 import (
 	"net/http"
 
-	"github.com/adroit-group/go-template/pkg/httputils"
-	"github.com/adroit-group/go-template/pkg/version"
+	"github.com/adroit-group/gote/pkg/httputils"
+	"github.com/adroit-group/gote/pkg/version"
 )
 
 // NewVersionHandlerFunc creates a new HTTP handler function that returns the version information

@@ -25,8 +25,8 @@ ARG BUILD_DATE
 RUN CGO_ENABLED=0 otel go build -a \
     -ldflags "\
         -s -w \
-        -X github.com/adroit-group/go-template/internal/version.committish=${COMMITTISH} \
-        -X github.com/adroit-group/go-template/internal/version.buildDate=${BUILD_DATE}" \
+        -X github.com/adroit-group/gote/internal/version.committish=${COMMITTISH} \
+        -X github.com/adroit-group/gote/internal/version.buildDate=${BUILD_DATE}" \
     -o bin/service cmd/main.go
 
 

@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/adroit-group/go-template/internal"
-	"github.com/adroit-group/go-template/internal/httpserver"
-	"github.com/adroit-group/go-template/pkg/config"
-	"github.com/adroit-group/go-template/pkg/infra"
-	"github.com/adroit-group/go-template/pkg/logger"
+	"github.com/adroit-group/gote/internal"
+	"github.com/adroit-group/gote/internal/httpserver"
+	"github.com/adroit-group/gote/pkg/config"
+	"github.com/adroit-group/gote/pkg/infra"
+	"github.com/adroit-group/gote/pkg/logger"
 	"github.com/go-playground/validator/v10"
 	"github.com/spf13/viper"
 )
