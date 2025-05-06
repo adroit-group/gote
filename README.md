@@ -40,17 +40,19 @@ A streamlined Go microservice template for quickly bootstrapping new microservic
 
 ### Using This Template
 
-The template can be used to create a new microservice with the following steps:
+The template can be used to create a new microservice by using the provided interactive install script.
+The script will set up the project structure, remove unnecessary files, and initialize a new Git repository.
+
+Currently, the template install script is designed to be run from the command line and will prompt you for information about your new service.
 
 ```bash
 # The setup script will:
 # 1. Clone this repository
-# 2. Delete the pkg directory and git history
-# 3. Initialize a new git repository
-# 4. Replace package names throughout the codebase
-# 5. Create an initial commit
+# 2. Delete the library files and every boilerplate and template files
+# 3. Replace package names throughout the codebase
+# 4. Initialize a new git repository
 
-./hack/setup-new-project.sh
+curl -sLS https://raw.githubusercontent.com/adroit-group/gote/master/hack/install.sh | bash
 ```
 
 ### Installation
@@ -64,6 +66,7 @@ cd go-microservice-template
 task get-tools
 
 # Or use Mise
+mise trust
 mise install
 ```
 
@@ -99,7 +102,7 @@ Additional configuration parameters can be found in `internal/config.go`.
 
 ```bash
 # Start development environment with Docker Compose
-task dev
+task start
 
 # Or run directly
 task run
@@ -149,7 +152,8 @@ For examples of how to use the HTTP server implementation, refer to the `interna
 - Redis caching integration
 - Expanded service configurations in Docker Compose
 - Trivy security scanning
-- SALSA integration for software supply chain security
+- SLSA integration for software supply chain security
+- Add parameters to the `hack/install.sh` script to allow for more customization during installation and provide hands off options for the user.
 
 ## Contributing
 
