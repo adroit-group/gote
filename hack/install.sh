@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-GITHUB_REPO="https://github.com/Shikachuu/gote.git"
+GITHUB_REPO="https://github.com/adroit-group/gote.git"
 
 echo "Installing GoTe..."
 
