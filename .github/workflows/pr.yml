@@ -1,0 +1,81 @@
+name: PR - Checks
+run-name: "PR #${{ github.event.pull_request.number }} - Checks"
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  labeler-auto-reviewer:
+    runs-on: ubuntu-latest
+    name: Label PR, run auto-review flows
+    permissions:
+      pull-requests: write
+      contents: read
+      issues: write
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          requireScope: false
+          ignoreLabels: |
+            dependabot
+
+      - name: Labeler
+        uses: actions/labeler@v5
+        id: labeler
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate
+          # These licenses requires disclosing every sourcecode, while this repo is public
+          # other generated from this might not, so we explicitily disallow deps with these licenses.
+          deny-licenses: LGPL-2.0-or-later, BSD-2-Clause, MPL-2.0
+          comment-summary-in-pr: always
+
+  labeler-linter:
+    runs-on: ubuntu-latest
+    name: Lint and run tests
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: jdx/mise-action@v2
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Cache Go modules
+        shell: bash
+        run: |
+          go get -d ./...
+
+      - name: Lint
+        shell: bash
+        run: |
+          go mod tidy
+          go fmt ./...
+          golangci-lint
+          shellcheck hack/install.sh
+          git diff --exit-code --name-only -- . || (echo "There is a git diff in generated code. Please run 'make generate' and 'make lint' to update your code!" && exit 1)
+
+      - name: Test library code
+        shell: bash
+        run: go test -cover ./pkg/...

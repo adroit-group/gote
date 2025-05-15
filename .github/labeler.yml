@@ -1,0 +1,23 @@
+"library":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "pkg/**/*"
+
+"implementation":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "internal/**/*"
+
+"tooling":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "mise.toml"
+          - "hack/**/*"
+          - "Taskfile.yml"
+          - ".github/**/*"
+
+"dependencies":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "go.mod"
+          - "go.sum"
