@@ -12,9 +12,9 @@ read -e -r -p "> " DEST_DIR
 mkdir -p "$DEST_DIR"
 cd "$DEST_DIR" || exit 1
 
-git clone -q --depth 1 --branch main "$GITHUB_REPO" .
+git clone -q --depth 1 --branch main "$GITHUB_REPO" . || exit 1
 
-rm -rf ./pkg .git go.sum CONTRIBUTIONS.md LICENSE README.md ./hack ./.github/PULL_REQUEST_TEMPLATE.md ./.github/ISSUE_TEMPLATE
+yes | rm -rf ./pkg .git go.sum CONTRIBUTIONS.md LICENSE README.md ./hack ./.github/PULL_REQUEST_TEMPLATE.md ./.github/ISSUE_TEMPLATE
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   function do_sed() {

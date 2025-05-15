@@ -52,16 +52,12 @@ Currently, the template install script is designed to be run from the command li
 # 3. Replace package names throughout the codebase
 # 4. Initialize a new git repository
 
-curl -sLS https://raw.githubusercontent.com/adroit-group/gote/master/hack/install.sh | bash
+bash -i <(curl -sLS https://raw.githubusercontent.com/adroit-group/gote/master/hack/install.sh)
 ```
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/go-microservice-template.git
-cd go-microservice-template
-
 # Install dependencies and tools
 task get-tools
 
