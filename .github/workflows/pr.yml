@@ -40,6 +40,7 @@ jobs:
           # These licenses requires disclosing every sourcecode, while this repo is public
           # other generated from this might not, so we explicitily disallow deps with these licenses.
           deny-licenses: LGPL-2.0-or-later, BSD-2-Clause, MPL-2.0
+          comment-summary-in-pr: always
 
   labeler-linter:
     runs-on: ubuntu-latest

@@ -147,12 +147,9 @@ For examples of how to use the HTTP server implementation, refer to the `interna
 ## Future Enhancements
 
 - Terraform deployment configurations
-- Additional security integrations
 - Postgres database integration
 - Redis caching integration
 - Expanded service configurations in Docker Compose
-- Trivy security scanning
-- SLSA integration for software supply chain security
 - Add parameters to the `hack/install.sh` script to allow for more customization during installation and provide hands off options for the user.
 
 ## Contributing
