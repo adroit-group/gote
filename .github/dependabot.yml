@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "gomod"
+    directory: "/"
+    labels:
+      - "dependabot"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 1
+    groups:
+      go-dependency-updates:
+        patterns:
+          - "*"
