@@ -6,7 +6,7 @@ echo "Installing GoTe..."
 
 # Prompt for destination directory with autocompletion
 echo "Enter destination directory (press Tab for autocompletion):"
-read -e -p "> " DEST_DIR
+read -e -r -p "> " DEST_DIR
 
 # Create directory if it doesn't exist
 mkdir -p "$DEST_DIR"
@@ -28,7 +28,7 @@ fi
 
 # Prompt for the new package name
 echo "Enter new package name (currently github.com/adroit-group/gote):"
-read new_package
+read -r new_package
 
 # Store the old package name
 old_package="github.com/adroit-group/gote"
@@ -36,7 +36,7 @@ old_package="github.com/adroit-group/gote"
 do_sed "s|$old_package|$new_package|g" go.mod
 
 # Process Go files in the internal directory
-find . -type f -name "*.go" | while read file; do
+find . -type f -name "*.go" | while read -r file; do
   # Replace package imports (but only for internal imports)
   do_sed "s|import \"$old_package/internal|import \"$new_package/internal|g" "$file"
   do_sed "s|import \"$old_package/cmd|import \"$new_package/cmd|g" "$file"

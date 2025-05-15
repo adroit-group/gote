@@ -1,2 +1,6 @@
-* text=auto
-* text eol=lf
+* text=auto eol=lf
+*.md merge=union
+
+**/mock_*.go linguist-generated merge=ours -diff
+
+*.go -text diff=golang
