@@ -1,0 +1,31 @@
+name: Bug
+description: File a bug/issue
+title: "[BUG] <title>"
+labels:
+  - "kind/bug"
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      description: |
+        Briefly describe the problem you are having.
+
+        Include both the current behavior (what you are seeing).
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: Briefly describe the expected behavior.
+      placeholder: ""
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional informations
+      description: |
+        Links, references, anything that will give us more context about the issue you are encountering!
+    validations:
+      required: false
