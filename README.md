@@ -18,20 +18,22 @@ A streamlined Go microservice template for quickly bootstrapping new microservic
 
 ```txt
 .
-├── api/            # OpenAPI 3.0/3.1 documentation
-├── build/          # Build files and Dockerfile
-├── cmd/            # Application entry points
-├── configs/        # Configuration files
-├── internal/       # Private application code
-│   └── httpserver/ # HTTP server implementation
-├── pkg/            # Public libraries (imported from upstream after templating)
-├── hack/           # Scripts for development and template cleanup
-└── .github/        # GitHub Actions and PR templates
+├── api/                # OpenAPI 3.0/3.1 or protobuf descriptors
+├── build/              # Build files and Dockerfile
+├── cmd/                # Application entry points
+├── configs/            # Configuration files
+├── internal/           # Private application code
+│   └── httpserver/     # HTTP server implementation
+│   └── httphandlers/   # HTTP handlers, which are usually consist of `http.HandlerFunc` or a builder for it
+│   └── services/       # Applications business logic, and the "glue-code" layer where data stores are connects with your handlers
+├── pkg/                # Public libraries (imported from upstream after templating)
+├── hack/               # Scripts for development and template cleanup
+└── .github/            # GitHub Actions and PR templates
 ```
 
 ## Requirements
 
-- Go 1.23+ (1.24 recommended)
+- Go 1.24+
 - [Task](https://taskfile.dev/)
 - [Mise](https://github.com/jdx/mise) (optional)
 - Docker and Docker Compose
@@ -146,7 +148,6 @@ For examples of how to use the HTTP server implementation, refer to the `interna
 - Postgres database integration
 - Redis caching integration
 - Expanded service configurations in Docker Compose
-- Add parameters to the `hack/install.sh` script to allow for more customization during installation and provide hands off options for the user.
 
 ## Contributing
 
