@@ -41,7 +41,7 @@ We follow a workflow based on GitHub Issues and Pull Requests.
 All pull requests are subject to review.
 
 1.  **CI Checks:** Your pull request must pass all Continuous Integration (CI) checks. This includes running linters and tests.
-2.  **Code Review:** A member of the [Your Company Name] team will review your code. They may provide feedback and request changes.
+2.  **Code Review:** A member of the Adroit team will review your code. They may provide feedback and request changes.
 
 ## Style Guidelines
 
