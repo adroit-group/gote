@@ -83,7 +83,7 @@ setup_sed() {
 # Function to clone repository and clean up unwanted files
 setup_repository() {
   echo "Setting up repository in $DEST_DIR"
-  
+
   # Create directory if it doesn't exist
   mkdir -p "$DEST_DIR"
   cd "$DEST_DIR" || exit 1
@@ -98,7 +98,7 @@ setup_repository() {
 # Function to replace package names throughout the codebase
 replace_package_names() {
   local OLD_PACKAGE="github.com/adroit-group/gote"
-  
+
   echo "Updating package names from $OLD_PACKAGE to $NEW_PACKAGE"
 
   # Update go.mod
@@ -112,17 +112,19 @@ replace_package_names() {
     do_sed "s|import ($|import (|" "$file" # Preserve multiline imports
     do_sed "s|\t\"$OLD_PACKAGE/internal|\t\"$NEW_PACKAGE/internal|g" "$file"
     do_sed "s|\t\"$OLD_PACKAGE/cmd|\t\"$NEW_PACKAGE/cmd|g" "$file"
-    
-    # Fix package declarations
-    # Extract the relative path from the internal directory
-    REL_PATH=$(echo "$file" | sed "s|internal/||" | xargs dirname)
-    if [ "$REL_PATH" = "." ]; then
-      # For files directly in the internal directory
-      do_sed "s|^package .*$|package internal|g" "$file"
-    else
-      # For files in subdirectories of internal
-      PACKAGE_NAME=$(basename "$REL_PATH")
-      do_sed "s|^package .*$|package $PACKAGE_NAME|g" "$file"
+
+    # Fix package declarations ONLY for files in the internal directory
+    if [[ "$file" == ./internal/* ]]; then
+      # Extract the relative path from the internal directory
+      REL_PATH=$(echo "$file" | sed "s|^./internal/||" | xargs dirname)
+      if [ "$REL_PATH" = "." ]; then
+        # For files directly in the internal directory
+        do_sed "s|^package .*$|package internal|g" "$file"
+      else
+        # For files in subdirectories of internal
+        PACKAGE_NAME=$(basename "$REL_PATH")
+        do_sed "s|^package .*$|package $PACKAGE_NAME|g" "$file"
+      fi
     fi
   done
 
@@ -137,20 +139,20 @@ replace_package_names() {
 # Function to finalize the setup
 finalize_setup() {
   echo "Finalizing setup"
-  
+
   # Tidy go modules
   go mod tidy
-  
+
   # Initialize git repository
   git init -b main
-  
+
   echo "Setup complete!"
 }
 
 # Main function to orchestrate the installation
 main() {
   echo "Installing GoTe..."
-  
+
   parse_arguments "$@"
   check_dependencies
   collect_input
