@@ -64,4 +64,3 @@ func TestRunGRPCServerWithGracefulShutdown_ListenerError(t *testing.T) {
 		t.Error("Expected error when using closed listener, but got nil")
 	}
 }
-
