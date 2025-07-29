@@ -1,6 +1,7 @@
 name: Bug
 description: File a bug/issue
 title: "[BUG] <title>"
+type: Bug
 labels:
   - "kind/bug"
 body:
@@ -18,7 +19,6 @@ body:
     attributes:
       label: Expected behavior
       description: Briefly describe the expected behavior.
-      placeholder: ""
     validations:
       required: true
 
