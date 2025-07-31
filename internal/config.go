@@ -13,6 +13,10 @@ const (
 	ConfigHTTPReadHeaderTimeout = "http_read_header_timeout"
 	ConfigHTTPWriteTimeout      = "http_write_timeout"
 	ConfigHTTPIdleTimeout       = "http_idle_timeout"
+	ConfigPostgresHost          = "postgres_host"
+	ConfigPostgresUser          = "postgres_user"
+	ConfigPostgresPassword      = "postgres_password"
+	ConfigPostgresDatabase      = "postgres_database"
 )
 
 var Configuration = []config.Config{
@@ -39,12 +43,32 @@ var Configuration = []config.Config{
 	},
 	{
 		NameInFile:   "http.write_timeout",
-		Key:          "ConfigHTTPWriteTimeout",
+		Key:          ConfigHTTPWriteTimeout,
 		DefaultValue: 15 * time.Second,
 	},
 	{
 		NameInFile:   "http.idle_timeout",
 		Key:          ConfigHTTPIdleTimeout,
 		DefaultValue: 60 * time.Second,
+	},
+	{
+		NameInFile:   "postgres.host",
+		Key:          ConfigPostgresHost,
+		DefaultValue: "db",
+	},
+	{
+		NameInFile:   "postgres.user",
+		Key:          ConfigPostgresUser,
+		DefaultValue: "postgres",
+	},
+	{
+		NameInFile:   "postgres.password",
+		Key:          ConfigPostgresPassword,
+		DefaultValue: "postgres",
+	},
+	{
+		NameInFile:   "postgres.database",
+		Key:          ConfigPostgresDatabase,
+		DefaultValue: "postgres",
 	},
 }
