@@ -6,7 +6,8 @@ http:
   write_timeout: 15s
   idle_timeout: 60s
 postgres:
-  host: db
+  host: postgres
   user: postgres
   password: postgres
   database: postgres
+  retries: 3
