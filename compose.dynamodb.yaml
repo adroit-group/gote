@@ -1,0 +1,13 @@
+services:
+  dynamodb:
+    image: instructure/dynamo-local-admin
+    restart: always
+    volumes:
+      - dynamodb-data:/var/lib/dynamodb
+    ports:
+      - "8000:8000"
+    networks:
+      - default
+
+volumes:
+  dynamodb-data:

@@ -5,3 +5,8 @@ http:
   read_header_timeout: 5s
   write_timeout: 15s
   idle_timeout: 60s
+dynamodb:
+  region: eu-west-1
+  endpoint: http://dynamodb:8000
+  profile: default
+  retries: 3
