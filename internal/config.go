@@ -13,6 +13,10 @@ const (
 	ConfigHTTPReadHeaderTimeout = "http_read_header_timeout"
 	ConfigHTTPWriteTimeout      = "http_write_timeout"
 	ConfigHTTPIdleTimeout       = "http_idle_timeout"
+	ConfigDynamoDBRegion        = "dynamo_db_region"
+	ConfigDynamoDBEndpoint      = "dynamo_db_endpoint"
+	ConfigDynamoDBProfile       = "dynamo_db_profile"
+	ConfigDynamoDBRetries       = "dynamo_db_retries"
 )
 
 var Configuration = []config.Config{
@@ -46,5 +50,29 @@ var Configuration = []config.Config{
 		NameInFile:   "http.idle_timeout",
 		Key:          ConfigHTTPIdleTimeout,
 		DefaultValue: 60 * time.Second,
+	},
+	{
+		NameInFile:     "dynamodb.region",
+		EnvironmentVar: "DYNAMO_DB_REGION",
+		Key:            ConfigDynamoDBRegion,
+		DefaultValue:   "eu-west-1",
+	},
+	{
+		NameInFile:     "dynamodb.endpoint",
+		EnvironmentVar: "DYNAMO_DB_ENDPOINT",
+		Key:            ConfigDynamoDBEndpoint,
+		DefaultValue:   "http://dynamodb:8000",
+	},
+	{
+		NameInFile:     "dynamodb.profile",
+		EnvironmentVar: "DYNAMO_DB_PROFILE",
+		Key:            ConfigDynamoDBProfile,
+		DefaultValue:   "default",
+	},
+	{
+		NameInFile:     "dynamodb.retries",
+		EnvironmentVar: "DYNAMO_DB_RETRIES",
+		Key:            ConfigDynamoDBRetries,
+		DefaultValue:   3,
 	},
 }
