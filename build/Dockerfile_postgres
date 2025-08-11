@@ -1,9 +1,0 @@
-FROM postgres:16.3-alpine
-
-RUN apk add --no-cache --virtual .build-deps build-base krb5-dev openssl-dev clang15 llvm15 git && \
-    git clone https://github.com/pgaudit/pgaudit.git && \
-    cd pgaudit && \
-    git checkout REL_16_STABLE && \
-    make install USE_PGXS=1 PG_CONFIG=/usr/local/bin/pg_config && \
-    apk del .build-deps && \
-    rm -rf pgaudit

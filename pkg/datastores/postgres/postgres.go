@@ -3,10 +3,15 @@ package postgres
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/go-playground/validator/v10"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"log/slog"
 	"net/url"
+)
+
+var (
+	ErrFailedPostgresConnection = errors.New("failed postgres connection")
 )
 
 type Config struct {
@@ -35,17 +40,17 @@ func New(ctx context.Context, validate *validator.Validate, config Config) (*pgx
 	for i := 0; i < config.Retries; i++ {
 		conn, err := pgxpool.New(ctx, pgURL.String())
 		if err != nil {
-			slog.Error("failed postgres connection", "error", err)
+			slog.Error(ErrFailedPostgresConnection.Error(), "error", err)
 			continue
 		}
 		if err = conn.Ping(ctx); err != nil {
-			slog.Error("failed postgres connection", "error", err)
+			slog.Error(ErrFailedPostgresConnection.Error(), "error", err)
 			continue
 		}
 
-		slog.Info("successful postgres connection")
+		slog.Info("successful postgres connection", "connection string", fmt.Sprintf("%s:5432/%s", config.Host, config.Database))
 		return conn, nil
 	}
 
-	return nil, errors.New("cannot connect to postgres database")
+	return nil, ErrFailedPostgresConnection
 }
