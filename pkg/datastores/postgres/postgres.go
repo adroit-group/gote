@@ -14,14 +14,21 @@ var (
 	ErrFailedPostgresConnection = errors.New("failed postgres connection")
 )
 
+// Config represents a configuration option.
 type Config struct {
-	Host     string `validate:"required"`
-	User     string `validate:"required"`
+	// Host is the host of the Postgresql server.
+	Host string `validate:"required"`
+	// User is the Postgresql user.
+	User string `validate:"required"`
+	// Password is the password for the Postgresql user.
 	Password string `validate:"required"`
+	// Database is the Postgresql database name.
 	Database string `validate:"required"`
-	Retries  int    `validate:"required"`
+	// Retries defines how many times should we try to connect.
+	Retries int `validate:"required"`
 }
 
+// New validates the configuration and tries to connect to the Postgresql database.
 func New(ctx context.Context, validate *validator.Validate, config Config) (*pgxpool.Pool, error) {
 	if err := validate.Struct(config); err != nil {
 		return nil, err
