@@ -5,3 +5,9 @@ http:
   read_header_timeout: 5s
   write_timeout: 15s
   idle_timeout: 60s
+postgres:
+  host: postgres
+  user: postgres
+  password: postgres
+  database: postgres
+  retries: 3
