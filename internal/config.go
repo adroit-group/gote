@@ -13,6 +13,10 @@ const (
 	ConfigHTTPReadHeaderTimeout = "http_read_header_timeout"
 	ConfigHTTPWriteTimeout      = "http_write_timeout"
 	ConfigHTTPIdleTimeout       = "http_idle_timeout"
+	ConfigValkeyHost            = "valkey_host"
+	ConfigValkeyPort            = "valkey_port"
+	ConfigValkeyDatabase        = "valkey_database"
+	ConfigValkeyRetries         = "valkey_retries"
 )
 
 var Configuration = []config.Config{
@@ -46,5 +50,29 @@ var Configuration = []config.Config{
 		NameInFile:   "http.idle_timeout",
 		Key:          ConfigHTTPIdleTimeout,
 		DefaultValue: 60 * time.Second,
+	},
+	{
+		NameInFile:     "valkey.host",
+		EnvironmentVar: "VALKEY_HOST",
+		Key:            ConfigValkeyHost,
+		DefaultValue:   "valkey",
+	},
+	{
+		NameInFile:     "valkey.port",
+		EnvironmentVar: "VALKEY_PORT",
+		Key:            ConfigValkeyPort,
+		DefaultValue:   "6379",
+	},
+	{
+		NameInFile:     "valkey.database",
+		EnvironmentVar: "VALKEY_DATABASE",
+		Key:            ConfigValkeyDatabase,
+		DefaultValue:   0,
+	},
+	{
+		NameInFile:     "valkey.retries",
+		EnvironmentVar: "VALKEY_RETRIES",
+		Key:            ConfigValkeyRetries,
+		DefaultValue:   3,
 	},
 }
