@@ -3,11 +3,11 @@ module github.com/adroit-group/gote
 go 1.24.1
 
 require (
-	github.com/go-chi/chi/v5 v5.2.2
+	github.com/go-chi/chi/v5 v5.2.3
 	github.com/go-playground/validator/v10 v10.27.0
 	github.com/spf13/viper v1.20.1
-	github.com/stretchr/testify v1.11.0
-	golang.org/x/sync v0.16.0
+	github.com/stretchr/testify v1.11.1
+	golang.org/x/sync v0.17.0
 )
 
 require (
